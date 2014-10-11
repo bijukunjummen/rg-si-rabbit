@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+			 xsi:schemaLocation="
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans:import resource="classpath:/rube/complicated/broker.xml"/>
+
+	<channel id="requestChannel"/>
+
+	<gateway id="echoGateway" service-interface="rube.complicated.EchoGateway" default-request-channel="requestChannel"
+			 default-reply-timeout="5000"/>
+
+	<channel id="toRabbit"/>
+
+	<splitter input-channel="requestChannel" output-channel="toRabbit" expression="payload.split('\s')"
+			  apply-sequence="true"/>
+
+	<channel id="sequenceChannel"/>
+
+	<int-amqp:outbound-gateway request-channel="toRabbit" reply-channel="sequenceChannel"
+							 amqp-template="amqpTemplate"/>
+
+
+	<!--On the way back from the queue-->
+	<channel id="aggregateChannel"/>
+
+	<resequencer input-channel="sequenceChannel" output-channel="aggregateChannel" release-partial-sequences="false"/>
+
+	<aggregator input-channel="aggregateChannel"
+				expression="T(com.google.common.base.Joiner).on(' ').join(![payload])"/>
+
+</beans:beans>
