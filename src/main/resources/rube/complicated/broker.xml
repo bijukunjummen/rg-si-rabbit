@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<rabbit:connection-factory id="rabbitConnectionFactory" username="admin" host="localhost" password="password" port="5672"/>
+	<context:property-placeholder/>
+	<rabbit:connection-factory id="rabbitConnectionFactory" username="${rabbit.user}" host="localhost" password="${rabbit.pass}" port="5672"/>
 	<rabbit:template id="amqpTemplate"
 					 connection-factory="rabbitConnectionFactory"
 					 exchange="rmq.rube.exchange"
 					 routing-key="rube.key"
 					 channel-transacted="true"/>
-
-	<rabbit:admin connection-factory="rabbitConnectionFactory"/>
 
 	<rabbit:queue name="rmq.rube.queue" durable="true"/>
 

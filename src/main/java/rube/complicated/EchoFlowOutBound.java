@@ -17,7 +17,7 @@ import org.springframework.integration.dsl.jms.Jms;
 import static java.util.stream.Collectors.toList;
 
 @Configuration
-@ImportResource("classpath:/rube/complicated/broker.xml")
+//@ImportResource("classpath:/rube/complicated/broker.xml")
 public class EchoFlowOutBound {
 
 	@Autowired

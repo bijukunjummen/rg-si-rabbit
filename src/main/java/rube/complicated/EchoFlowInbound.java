@@ -9,15 +9,19 @@ import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.amqp.Amqp;
+import rube.config.RabbitConfig;
 
 @Configuration
-@ImportResource("classpath:/rube/complicated/broker.xml")
+//@ImportResource("classpath:/rube/complicated/broker.xml")
 public class EchoFlowInbound {
+
+	@Autowired
+	private RabbitConfig rabbitConfig;
 
 	@Bean
 	public IntegrationFlow inboundFlow() {
 		return IntegrationFlows.from(Amqp
-				.inboundGateway(connectionFactory, "rmq.rube.queue"))
+				.inboundGateway(connectionFactory, rabbitConfig.rubeQueue()))
 				.transform((String s) -> s.toUpperCase())
 				.get();
 	}
