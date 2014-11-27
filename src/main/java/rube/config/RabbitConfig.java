@@ -5,6 +5,7 @@ import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,5 +39,9 @@ public class RabbitConfig {
 		r.setRoutingKey("rube.key");
 		r.setConnectionFactory(rabbitConnectionFactory);
 		return r;
+	}
+	@Bean
+	public RabbitMessagingTemplate rabbitMessagingTemplate() {
+		return new RabbitMessagingTemplate(rubeExchangeTemplate());
 	}
 }

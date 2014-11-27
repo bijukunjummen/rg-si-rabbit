@@ -20,14 +20,11 @@ import static java.util.stream.Collectors.toList;
 //@ImportResource("classpath:/rube/complicated/broker.xml")
 public class EchoFlowOutBound {
 
-	@Autowired
-	private AmqpTemplate amqpTemplate;
-
 	@Bean
-	public IntegrationFlow toOutboundQueueFlow() {
+	public IntegrationFlow toOutboundQueueFlow(AmqpTemplate rubeExchangeTemplate) {
 		return IntegrationFlows.from("requestChannel")
 				.split(s -> s.applySequence(true).get().getT2().setDelimiters("\\s"))
-				.handle(Amqp.outboundGateway(amqpTemplate))
+				.handle(Amqp.outboundGateway(rubeExchangeTemplate))
 				.resequence()
 				.aggregate(aggregate ->
 						aggregate.outputProcessor(g ->

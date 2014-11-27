@@ -12,14 +12,13 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.1.7.RELEASE</version>
+		<version>1.2.0.RC1</version>
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-integration.version>4.0.1.RELEASE</spring-integration.version>
 		<activemq.version>5.9.1</activemq.version>
-		<spring-integration-java-dsl.version>1.0.0.BUILD-SNAPSHOT</spring-integration-java-dsl.version>
+		<spring-integration-java-dsl.version>1.0.0.RC1</spring-integration-java-dsl.version>
 	</properties>
 
 	<dependencies>
@@ -43,7 +42,6 @@
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-amqp</artifactId>
-			<version>${spring-integration.version}</version>
 		</dependency>
 
 		<dependency>
@@ -54,9 +52,30 @@
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-java-dsl</artifactId>
-			<version>${spring-integration-java-dsl.version}</version>
+			<version>1.0.0.RELEASE</version>
 		</dependency>
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<url>http://repo.spring.io/snapshot</url>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<url>http://repo.spring.io/milestone</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<url>http://repo.spring.io/snapshot</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<url>http://repo.spring.io/milestone</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<testResources>
 			<testResource>

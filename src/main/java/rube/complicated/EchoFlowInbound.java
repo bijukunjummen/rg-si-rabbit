@@ -17,6 +17,8 @@ public class EchoFlowInbound {
 
 	@Autowired
 	private RabbitConfig rabbitConfig;
+	@Autowired
+	private ConnectionFactory connectionFactory;
 
 	@Bean
 	public IntegrationFlow inboundFlow() {
@@ -25,7 +27,4 @@ public class EchoFlowInbound {
 				.transform((String s) -> s.toUpperCase())
 				.get();
 	}
-
-	@Autowired
-	private ConnectionFactory connectionFactory;
 }
