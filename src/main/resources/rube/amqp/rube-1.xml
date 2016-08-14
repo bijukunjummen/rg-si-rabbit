@@ -8,12 +8,12 @@
 		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<beans:import resource="classpath:/rube/complicated/broker.xml"/>
+	<beans:import resource="classpath:/rube/amqp/broker.xml"/>
 
 	<channel id="requestChannel"/>
 
-	<gateway id="echoGateway" service-interface="rube.complicated.EchoGateway" default-request-channel="requestChannel"
-			 default-reply-timeout="5000"/>
+	<gateway id="echoGateway" service-interface="rube.amqp.EchoGateway" default-request-channel="requestChannel"
+             default-reply-timeout="5000"/>
 
 	<channel id="toRabbit"/>
 

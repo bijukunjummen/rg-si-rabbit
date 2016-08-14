@@ -1,4 +1,4 @@
-package rube.complicated;
+package rube.amqp;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +11,6 @@ import rube.config.RabbitConfig;
 @Configuration
 @EnableIntegration
 @IntegrationComponentScan
-@ComponentScan
 @EnableAutoConfiguration
 @Import({EchoFlowOutBound.class, EchoFlowInbound.class, RabbitConfig.class})
 public class EchoFlow {

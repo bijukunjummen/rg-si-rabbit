@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<beans:import resource="classpath:/rube/complicated/broker.xml"/>
+	<beans:import resource="classpath:/rube/amqp/broker.xml"/>
 
 	<channel id="enhanceMessageChannel"/>
 

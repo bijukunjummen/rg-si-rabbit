@@ -1,4 +1,4 @@
-package rube.complicated;
+package rube.amqp;
 
 import org.springframework.integration.annotation.Gateway;
 import org.springframework.integration.annotation.MessagingGateway;
