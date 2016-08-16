@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 public class EchoFlowJavaDslTest {
 	
 	@Autowired
-    EchoGateway echoGateway;
+    private EchoGateway echoGateway;
 
 	@Test
 	@DirtiesContext

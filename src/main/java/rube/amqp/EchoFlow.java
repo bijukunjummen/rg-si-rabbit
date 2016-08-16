@@ -9,7 +9,6 @@ import org.springframework.integration.config.EnableIntegration;
 import rube.config.RabbitConfig;
 
 @Configuration
-@EnableIntegration
 @IntegrationComponentScan
 @EnableAutoConfiguration
 @Import({EchoFlowOutBound.class, EchoFlowInbound.class, RabbitConfig.class})
